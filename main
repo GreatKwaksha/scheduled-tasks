@@ -1,0 +1,21 @@
+import pandas
+import csv
+import smtplib
+import datetime as dt
+from random import choice
+today=dt.datetime.now()
+with open ("birthdays.csv") as birthdays:
+    birthdays_data=csv.DictReader(birthdays)
+    for row in birthdays_data:
+        if int(row["day"])==today.day:
+            found_row=row
+            if int(found_row["month"])==today.month:
+                number=choice([1,2,3])
+                with open(f"./letter_templates/letter_{number}.txt") as letter:
+                    letter_text=letter.read()
+                    final_letter=letter_text.replace("[NAME]",row["name"])
+                    with smtplib.SMTP("smtp.gmail.com") as new_connection:
+                        my_email="jefferypennywise@gmail.com"
+                        new_connection.starttls()
+                        new_connection.login(user=my_email,password="trqx mpky ihos eudh")
+                        new_connection.sendmail(from_addr=my_email,to_addrs=f"{row["email"]}",msg=f"Subject:Happy Birthday\n\n{final_letter}")

@@ -3,9 +3,9 @@ import os
 import json
 from twilio.rest import Client
 
-api_key=os.environ.get(API_KEY)
-token=os.environ.get(TWILIO_TOKEN)
-sid=os.environ.get(TWILIO_SID)
+api_key=os.environ.get("API_KEY")
+token=os.environ.get("TWILIO_TOKEN")
+sid=os.environ.get("TWILIO_SID")
 my_lat=28.4546
 my_long=117.9436
 response=requests.get(url=f"https://api.openweathermap.org/data/2.5/forecast?lat={my_lat}&lon={my_long}&appid={api_key}&cnt=4")

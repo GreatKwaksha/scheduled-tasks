@@ -1,8 +1,10 @@
 import requests
+from twilio.http.http_client import TwilioHttpClient
 import os
 import json
 from twilio.rest import Client
-
+proxy_client=TwilioHttpClient()
+proxy_client.session.proxies={'https': os.environ['https_proxy']}
 api_key=os.environ.get("API_KEY")
 token=os.environ.get("TWILIO_TOKEN")
 sid=os.environ.get("TWILIO_SID")
@@ -16,7 +18,7 @@ for d in weather_data["list"]:
         if i["id"]<700:
             raining=True
 if raining==True:
-    client=Client(sid,token)
+    client=Client(sid,token,http_client=proxy_client)
     message=client.messages \
     .create(body="Чакаецца дождж у бліжэйшыя гадзіны. Мо і ракетны сыпане.",from_="whatsapp:+14155238886",to="whatsapp:+972533714240")
     print(message.status)

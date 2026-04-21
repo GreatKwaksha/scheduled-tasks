@@ -2,9 +2,9 @@ import requests
 import json
 from twilio.rest import Client
 
-api_key="52e3a2c07857777e728d6f680bcfe84c"
-token="cb0a4ea40b55bcae0db06005093894bf"
-sid="ACd43cadc60ae83267188af6210d036713"
+api_key=API_KEY
+token=TWILIO_TOKEN
+sid=TWILIO_SID
 my_lat=28.4546
 my_long=117.9436
 response=requests.get(url=f"https://api.openweathermap.org/data/2.5/forecast?lat={my_lat}&lon={my_long}&appid={api_key}&cnt=4")

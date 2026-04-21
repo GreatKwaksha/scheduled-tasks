@@ -9,7 +9,13 @@ token=os.environ.get("TWILIO_TOKEN")
 sid=os.environ.get("TWILIO_SID")
 my_lat=28.4546
 my_long=117.9436
-response=requests.get(url=f"https://api.openweathermap.org/data/2.5/forecast?lat={my_lat}&lon={my_long}&appid={api_key}&cnt=4")
+parameters = {
+    "lat": my_lat,
+    "lon": my_long,
+    "appid": api_key,
+    "cnt": 4
+}
+response=requests.get(url="https://api.openweathermap.org/data/2.5/forecast",params=parameters)
 response.raise_for_status()
 weather_data=response.json()
 for d in weather_data["list"]:
